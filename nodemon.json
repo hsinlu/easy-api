@@ -1,0 +1,20 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    "node_modules",
+    "storage",
+    "test"
+  ],
+  "verbose": true,
+  "execMap": {
+    "": "node",
+    "test": "npm run test"
+  },
+  "ext": "js json",
+  "watch": [],
+  "env": {
+    "NODE_ENV": "local",
+    "PORT": "8000"
+  },
+  "legacy-watch": false
+}

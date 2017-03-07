@@ -1,0 +1,57 @@
+{
+  "name": "easy-api",
+  "version": "0.0.1",
+  "description": "easy api based on koa, redis, mongodb",
+  "main": "./bin/start.js",
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/start.js",
+    "pm2": "pm2 start process.json",
+    "dev": "nodemon ./bin/start.js",
+    "dev-debug": "DEBUG=packer* nodemon ./bin/start.js",
+    "clean-logs": "rm -rf storage/lboilerogs/*.log"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "keywords": [
+    "koa",
+    "redis",
+    "mongodb",
+    "middleware",
+    "auth",
+    "jwt",
+    "signature",
+    "validator",
+    "easy",
+    "api",
+    "easy api"
+  ],
+  "author": {
+    "name": "hsinlu",
+    "email": "hsinlu@live.com"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "debug": "^2.2.0",
+    "jsonwebtoken": "^7.0.0",
+    "kcors": "^2.1.1",
+    "koa": "^2.0.1",
+    "koa-bodyparser": "^3.0.0",
+    "koa-conditional-get": "^2.0.0",
+    "koa-etag": "^3.0.0",
+    "koa-log4": "^2.0.1",
+    "koa-router": "^7.0.1",
+    "koa-unless": "^1.0.0",
+    "mongoose": "^4.4.14",
+    "node-rsa": "^0.4.0",
+    "nodemailer": "^2.4.2",
+    "only": "0.0.2",
+    "redis": "^2.6.0-2",
+    "uuid": "^2.0.3",
+    "validator": "^5.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  },
+  "license": "MIT"
+}

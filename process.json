@@ -1,0 +1,17 @@
+{
+  "apps": [{
+    "name": "easy-api",
+    "script": "./bin/start.js",
+    "instances": -1,
+    "exec_mode": "cluster",
+    "watch": false,
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production": {
+      "NODE_ENV": "production"
+    },
+    "node_args": "--harmony-async-await",
+    "log_date_format": "YYYY-MM-DD HH:mm Z"
+  }]
+}
