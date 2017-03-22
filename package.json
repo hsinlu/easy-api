@@ -8,7 +8,8 @@
     "pm2": "pm2 start process.json",
     "dev": "nodemon ./bin/start.js",
     "dev-debug": "DEBUG=packer* nodemon ./bin/start.js",
-    "clean-logs": "rm -rf storage/lboilerogs/*.log"
+    "clean-logs": "rm -rf storage/lboilerogs/*.log",
+    "seeder": "node bin/seeder"
   },
   "engines": {
     "node": ">= 7.6.0"
