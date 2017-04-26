@@ -54,7 +54,7 @@ npm i
   |-- middleware                  执行中间件
     |-- auth.js                   用户授权校验
     |-- globalErrorHandler.js     全局错误处理
-    |-- responseId.js             请求响应 uuid
+    |-- requestId.js              请求 ID
     |-- signature.js              签名校验
     |-- validator.js              参数校验
     |-- visitLogger.js            请求日志
