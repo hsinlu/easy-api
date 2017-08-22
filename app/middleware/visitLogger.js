@@ -1,5 +1,3 @@
-'use strict';
-
 const logger = require('../lib/logger');
 
 module.exports = async (ctx, next) => {

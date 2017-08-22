@@ -1,6 +1,3 @@
-/**
- * 用户
- */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const constants = require('../common/constants');

@@ -3,16 +3,16 @@
 简单的 api，基于 koa2.0.1、mongodb、redis。
 
 ## 环境需求
-1. nodejs >= 7.6.0
+1. nodejs >= 8.4.0
 2. mongodb
 3. redis
 
 ## 特性
 
-- [x] 签名验证，将不合法请求抛之门外
+- [x] 签名验证，将不合法请求拒之门外
 - [x] JWT 授权验证，退出后 Token 自动回收
 - [x] 统一全局异常处理
-- [x] 自动请求 Id，方便请求追踪，支持前端传入调度
+- [x] 自动请求 Id，方便请求追踪，支持前端传入调试
 - [x] 简单可重用的请求参数校验器
 - [x] 记录请求日志，方便追踪
 - [x] 异常错误邮件通知（需配置）
@@ -66,9 +66,6 @@ npm i
     |-- user.js                   用户请求参数校验
     |-- ...
   |-- index.js                    app启动
-|-- bin
-  |-- seeder.js                 初始化数据执行文件
-  |-- start.js                  启动服务执行文件
 |-- db                          数据库相关
   |-- seeder                    数据库数据初始化脚本
     |-- index.js                数据库数据初始化执行文件入口
@@ -85,7 +82,7 @@ npm i
 </pre>
 
 #### 更改环境配置
-打开`app/config/default.js`更改`db`为您的**mongodb**地址、`redis`为您的**redis**地址
+`app/config`包含各环境配置，其中`default.js`为默认配置，`db`为您的**mongodb**地址、`redis`为您的**redis**地址，在对应的环境配置中覆写指定的配置项即可。
 
 #### 初始化数据
 所有的初始化数据脚本存放在`db/seeder`中，请参考`db/user.js`，添加完后需要在`db/index.js`中注册

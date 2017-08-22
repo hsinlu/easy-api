@@ -15,6 +15,8 @@ const logger = require('./lib/logger');
 const apiV1 = require('./api/v1');
 const app = new Koa();
 
+process.env.TZ = 'Asia/Shanghai';
+
 (async () => {
   // 进程未捕获异常处理
   process

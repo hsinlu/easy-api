@@ -8,8 +8,6 @@ const Query = mongoose.Query;
  * @param {number|string} pageSize 分页大小，必须可转换为数字
  *
  * @return {Object}
- *
- * ####
  * {
  *  list:       数据列表
  *  totalCount: 数据总条数
