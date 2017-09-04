@@ -1,6 +1,6 @@
 # easy-api
 
-简单的 api，基于 koa2.0.1、mongodb、redis。
+简单的 api，基于 koa2、mongodb、redis。
 
 ## 环境需求
 1. nodejs >= 8.4.0

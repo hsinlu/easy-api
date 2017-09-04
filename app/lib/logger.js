@@ -1,5 +1,5 @@
-const log4js = require('koa-log4');
-const config = require('../config');
+const log4js = require('koa-log4')
+const config = require('../config')
 
 log4js.configure({
   appenders: [{
@@ -63,29 +63,29 @@ log4js.configure({
       category: "mailer"
     }
   }]
-});
+})
 
-const visitLogger = log4js.getLogger('visit');
-const infoLogger = log4js.getLogger('info');
-const errorLogger = log4js.getLogger('error');
-const fatalLogger = log4js.getLogger('fatal');
+const visitLogger = log4js.getLogger('visit')
+const infoLogger = log4js.getLogger('info')
+const errorLogger = log4js.getLogger('error')
+const fatalLogger = log4js.getLogger('fatal')
 
 class Logger {
   visit() {
-    visitLogger.trace.apply(visitLogger, arguments);
+    visitLogger.trace.apply(visitLogger, arguments)
   }
 
   info() {
-    infoLogger.info.apply(infoLogger, arguments);
+    infoLogger.info.apply(infoLogger, arguments)
   }
 
   error() {
-    errorLogger.error.apply(errorLogger, arguments);
+    errorLogger.error.apply(errorLogger, arguments)
   }
 
   fatal() {
-    fatalLogger.fatal.apply(fatalLogger, arguments);
+    fatalLogger.fatal.apply(fatalLogger, arguments)
   }
 }
 
-module.exports = new Logger;
+module.exports = new Logger

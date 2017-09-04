@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const Query = mongoose.Query;
+const mongoose = require('mongoose')
+const {
+  Query
+} = mongoose
 
 /**
  * 分页
@@ -16,14 +18,20 @@ const Query = mongoose.Query;
  *  hasNext:    是否还有下一页数据
  * }
  */
-Query.prototype.paginate = async function (pageIndex = 1, pageSize = 15) {
-  if (typeof pageIndex === 'string') pageIndex = parseInt(pageIndex);
-  if (typeof pageSize === 'string') pageSize = parseInt(pageSize);
+Query.prototype.paginate = async(pageIndex = 1, pageSize = 15) => {
+  if (typeof pageIndex === 'string') pageIndex = parseInt(pageIndex)
+  if (typeof pageSize === 'string') pageSize = parseInt(pageSize)
 
-  let list = await this.skip((pageIndex - 1) * pageSize).limit(pageSize);
-  let totalCount = await this.model.count(this.getQuery());
+  let list = await this.skip((pageIndex - 1) * pageSize).limit(pageSize)
+  let totalCount = await this.model.count(this.getQuery())
 
-  let hasNext = totalCount > (pageIndex * pageSize);
+  let hasNext = totalCount > (pageIndex * pageSize)
 
-  return { list, totalCount, pageIndex, pageSize, hasNext };
+  return {
+    list,
+    totalCount,
+    pageIndex,
+    pageSize,
+    hasNext
+  }
 }

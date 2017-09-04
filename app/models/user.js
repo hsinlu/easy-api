@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const constants = require('../common/constants');
+const mongoose = require('mongoose')
+const {
+  Schema
+} = mongoose
+const constants = require('../common/constants')
 
 const userSchema = new Schema({
   // 账号
@@ -47,8 +49,8 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now
   }
-});
+})
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+module.exports = User

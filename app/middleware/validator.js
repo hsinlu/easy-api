@@ -1,36 +1,41 @@
-const Validator = require('../lib/validator');
-const ValidatorError = Validator.ValidatorError;
+const Validator = require('../lib/validator')
+const {
+  ValidatorError
+} = Validator
 
-module.exports = async (ctx, next) => {
+module.exports = async(ctx, next) => {
   // 挂载验证方法
   ctx.validate = (validations) => {
-    const errors = [];
+    const errors = []
 
     // 拼接所有请求参数
-    const params = Object.assign({}, ctx.query, ctx.request.body, ctx.params, ctx.request.body.fields);
+    const params = Object.assign({}, ctx.query, ctx.request.body, ctx.params, ctx.request.body.fields)
 
     for (let name in validations) {
-      const fn = validations[name];
+      const fn = validations[name]
 
-      if (!fn) throw new TypeError(`必须为参数${name}提供验证程序！`);
-      if (typeof fn !== 'function') throw new TypeError(`参数${name}验证程序必须为方法！`);
+      if (!fn) throw new TypeError(`必须为参数${name}提供验证程序！`)
+      if (typeof fn !== 'function') throw new TypeError(`参数${name}验证程序必须为方法！`)
 
-      const validator = new Validator(name, params[name]);
-      fn(validator);
+      const validator = new Validator(name, params[name])
+      fn(validator)
 
       if (validator.errors.length > 0) {
-        errors.push({ name, message: validator.errors.join(',') });
+        errors.push({
+          name,
+          message: validator.errors.join(',')
+        })
       }
     }
 
     if (errors.length > 0) {
-      const err = new ValidatorError;
-      err.status = 422;
-      err.errors = errors;
+      const err = new ValidatorError
+      err.status = 422
+      err.errors = errors
 
-      throw err;
+      throw err
     }
   }
 
-  await next();
-};
+  await next()
+}
