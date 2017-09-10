@@ -36,6 +36,7 @@
     "email": "hsinlu@live.com"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "bluebird": "^3.5.0",
     "debug": "^2.6.8",
     "jsonwebtoken": "^7.4.3",

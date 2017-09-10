@@ -1,12 +1,13 @@
 const User = require('../../app/models/user')
-const constants = require('../../app/common/constants')
-
-const userList = [{
-  username: 'admin123',
-  password: '123456'
-}]
+const bcrypt = require('bcrypt')
+const {
+  saltRounds
+} = require('../../app/config')
 
 module.exports = async() => {
-  for (let item of userList)
-    await User.create(item)
+  const user = {
+    username: 'admin123'
+  }
+  user.password = await bcrypt.hash('123456', saltRounds)
+  await User.create(user)
 }

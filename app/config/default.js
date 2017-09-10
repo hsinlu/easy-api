@@ -32,6 +32,8 @@ module.exports = {
     expressIn: 24 * 60 * 1000
   },
 
+  saltRounds: 10,
+
   /** 客户端相关 */
   client: {
     /** 客户端 key */

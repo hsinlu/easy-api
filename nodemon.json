@@ -14,7 +14,7 @@
   "watch": [],
   "env": {
     "NODE_ENV": "local",
-    "PORT": "8000"
+    "PORT": "3000"
   },
   "legacy-watch": false
 }

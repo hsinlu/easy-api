@@ -1,5 +1,6 @@
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const only = require('only')
 const debug = require('debug')('easy-api:api:auth')
 const constants = require('../../common/constants')
@@ -32,8 +33,9 @@ router
     // 用户被锁定
     if (user.state === constants.STATUS_STOP) ctx.throw(423, '用户已被锁定')
 
-    // 验证密码是否正确   todo 加密处理
-    if (password !== user.password) {
+    const match = await bcrypt.compare(password, user.password)
+    // 验证密码是否正确
+    if (!match) {
       ctx.throw(400, '密码错误')
     }
 

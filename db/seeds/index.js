@@ -10,6 +10,8 @@ async function seeder() {
     await connect()
     console.log('mongodb 已成功连接，开始初始化数据。')
 
+    await mongoose.connection.dropDatabase()
+
     // 初始化用户
     await require('./user')()
 
