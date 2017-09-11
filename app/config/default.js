@@ -32,6 +32,7 @@ module.exports = {
     expressIn: 24 * 60 * 1000
   },
 
+  /** bcrypt 加盐 */
   saltRounds: 10,
 
   /** 客户端相关 */
