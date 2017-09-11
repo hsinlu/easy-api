@@ -26,7 +26,7 @@
 #### 使用git clone指令下载最新的代码
 ```bash
 git clone https://github.com/hsinlu/easy-api.git
-
+cd easy-api
 npm i
 ```
 
@@ -42,6 +42,11 @@ npm i
   |-- common                      公共代码
     |-- constants.js              常量定义
     |-- ...
+  |-- config
+    |-- default.js                默认的配置
+    |-- index.js                  根据环境返回响应配置
+    |-- local.js                  本地开发配置
+    |-- production.js             生产环境配置
   |-- lib                         项目公共库
     |-- db
       |-- connect.js                连接mongodb
@@ -65,12 +70,13 @@ npm i
   |-- validators                  请求校验
     |-- user.js                   用户请求参数校验
     |-- ...
-  |-- index.js                    app启动
+  |-- index.js                    app实例启动
 |-- db                          数据库相关
-  |-- seeder                    数据库数据初始化脚本
+  |-- seeds                     数据库数据初始化脚本
     |-- index.js                数据库数据初始化执行文件入口
     |-- user.js                 具体数据表初始化脚本
     |-- ...
+  |-- empty-data.js             清空数据脚本
 |-- storage                     文件存储，需要读写权限
   |-- cache                     缓存文件
     |-- ...
@@ -85,18 +91,41 @@ npm i
 `app/config`包含各环境配置，其中`default.js`为默认配置，`db`为您的**mongodb**地址、`redis`为您的**redis**地址，在对应的环境配置中覆写指定的配置项即可。
 
 #### 初始化数据
-所有的初始化数据脚本存放在`db/seeder`中，请参考`db/user.js`，添加完后需要在`db/index.js`中注册
+所有的初始化数据脚本存放在`db/seeds`中，请参考`db/user.js`，添加完后需要在`db/index.js`中注册
 ```bash
 npm run seeder
 ```
 
-#### 运行（开发）
+#### npm 脚本
+
+##### 运行（开发）
 ```bash
 # 已使用nodemon，代码更新后会自动重启服务
 npm run dev
+
+# 输出debug信息
+npm run dev-debug
 ```
 
-#### 运行（生产）
+##### 运行（生产）
 ```bash
 npm start
+
+# pm2 启动
+npm run pm2
+```
+
+##### 清空日志
+```bash
+npm run clean-logs
+```
+
+##### 初始化数据
+```bash
+npm run seeder
+```
+
+##### 清空数据
+```bash
+npm run empty-data
 ```
