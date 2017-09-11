@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const connect = require('../../app/lib/db/connect')
-const User = require('../../app/models/user')
+const connect = require('../app/lib/db/connect')
+const User = require('../app/models/user')
 
 async function emptyData() {
   try {

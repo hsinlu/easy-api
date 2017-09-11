@@ -10,7 +10,7 @@
     "dev-debug": "DEBUG=easy-api* nodemon app",
     "clean-logs": "rm -rf storage/logs/*.log",
     "seeder": "node db/seeds",
-    "empty-data": "node db/seeds/empty-data.js"
+    "empty-data": "node db/empty-data.js"
   },
   "engines": {
     "node": ">= 8.4.0"
