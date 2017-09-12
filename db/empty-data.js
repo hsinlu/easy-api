@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const connect = require('../app/lib/db/connect')
 const User = require('../app/models/user')
 
-async function emptyData() {
+!(async function emptyData() {
   try {
     await connect()
 
@@ -15,6 +15,4 @@ async function emptyData() {
     console.log(`清空数据错误: ${err}`)
     process.exit(1)
   }
-}
-
-emptyData()
+})()

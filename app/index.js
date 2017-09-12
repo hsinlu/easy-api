@@ -22,7 +22,7 @@ process
     logger.error('进程未捕获错误: ', err)
   })
 
-async function run() {
+!(async function run() {
   try {
     // 连接 mongodb
     await require('./lib/db/connect')()
@@ -73,6 +73,4 @@ async function run() {
   const port = process.env.PORT || 8000
   app.listen(port)
   logger.info(`api服务已成功在端口${port}启动`)
-}
-
-run()
+})()

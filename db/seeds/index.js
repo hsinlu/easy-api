@@ -4,7 +4,7 @@
 const mongoose = require('mongoose')
 const connect = require('../../app/lib/db/connect')
 
-async function seeder() {
+!(async function seeder() {
   try {
     // 连接 mongodb
     await connect()
@@ -22,6 +22,4 @@ async function seeder() {
     console.log(`初始化数据错误: ${err}`)
     process.exit(1)
   }
-}
-
-seeder()
+})()
