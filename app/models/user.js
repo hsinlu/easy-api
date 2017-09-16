@@ -28,7 +28,7 @@ const userSchema = new Schema({
     required: true,
     enum: {
       values: [STATUS_NORMAL, STATUS_STOP],
-      message: '状态必须是${STATUS_NORMAL}(正常)、${STATUS_STOP}(封停)之一'
+      message: `状态必须是${STATUS_NORMAL}(正常)、${STATUS_STOP}(封停)之一`
     },
     default: STATUS_NORMAL
   },
