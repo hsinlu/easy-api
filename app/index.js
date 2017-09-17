@@ -43,11 +43,7 @@ process.on('uncaughtException', (err) => logger.error('进程未捕获错误: ',
       // 返回可以跨域访问的url
       origin: (ctx) => {
         const origin = ctx.get('origin')
-        if (config.cors.allowOrigins.includes(origin)) {
-          return origin
-        }
-
-        return false
+        return config.cors.allowOrigins.includes(origin) ? origin : false
       }
     }))
     .use(requestId())

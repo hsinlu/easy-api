@@ -16,14 +16,14 @@ const router = require('koa-router')()
 
 router
   // 登录
-  .post('/signin', userValidator.signin, async(ctx) => {
+  .post('/signin', userValidator.signin, async (ctx) => {
     const {
       username,
       password
     } = ctx.request.body
 
     // 查询数据库已有的用户
-    const user = await User.findOne({
+    let user = await User.findOne({
       username: username,
       isDeleted: false
     })
@@ -43,19 +43,19 @@ router
     }
 
     // 更新最后一次登录事件
-    await User.update({
+    user = await User.findOneAndUpdate({
       _id: user._id
     }, {
-      $set: {
-        lastLogin: new Date
-      }
-    })
+        $set: {
+          lastLoginAt: new Date
+        }
+      }, { new: true })
 
     ctx.body = {
       _id: user._id,
       username: user.username,
       state: user.state,
-      lastLogin: user.lastLogin,
+      lastLoginAt: user.lastLoginAt,
       exp: timespan(config.jwt.expressIn),
       token: jwt.sign(only(user, '_id username'), config.jwt.secret, {
         expiresIn: config.jwt.expressIn
@@ -64,7 +64,7 @@ router
   })
 
   // 退出
-  .get('/signout', auth(), async(ctx) => {
+  .get('/signout', auth(), async (ctx) => {
     const {
       exp,
       token
