@@ -16,4 +16,3 @@ client.on('error', (err) => {
 })
 
 module.exports = client
-module.exports.prefix = 'easy-api/'

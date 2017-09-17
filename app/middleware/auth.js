@@ -3,6 +3,9 @@ const JWT = Promise.promisifyAll(require('jsonwebtoken'))
 const debug = require('debug')('easy-api:middleware:auth')
 const redis = require('../lib/redis')
 const config = require('../config')
+const {
+  jwtTokenKey
+} = require('../common/keys')
 
 module.exports = () => {
   return async(ctx, next) => {
@@ -15,10 +18,10 @@ module.exports = () => {
     }
 
     // 判断jwt是否已退出过，如果已经退出，返回401
-    const isExist = await redis.existsAsync(redis.prefix + token)
+    const isExist = await redis.existsAsync(jwtTokenKey(token))
     if (!!isExist) {
-      debug(`token ${token}已不可使用`)
-      ctx.throw(401, '当前 token 已不可使用')
+      debug(`token ${token}已失效`)
+      ctx.throw(401, '当前 token 已失效')
     }
 
     // 验证 token，并解密

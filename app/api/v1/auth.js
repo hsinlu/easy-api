@@ -9,15 +9,18 @@ const config = require('../../config')
 const timespan = require('jsonwebtoken/lib/timespan')
 const redis = require('../../lib/redis')
 const userValidator = require('../../validators/user')
+const {
+  jwtTokenKey
+} = require('../../common/keys')
 const router = require('koa-router')()
 
 router
   // 登录
-  .get('/signin', userValidator.signin, async(ctx) => {
+  .post('/signin', userValidator.signin, async(ctx) => {
     const {
       username,
       password
-    } = ctx.query
+    } = ctx.request.body
 
     // 查询数据库已有的用户
     const user = await User.findOne({
@@ -69,7 +72,7 @@ router
 
     // 将 Authorization 添加到 Redis，包含此 token 的请求将不可用
     let ttl = Math.floor(exp - (new Date() / 1000))
-    await redis.setexAsync(redis.prefix + token, ttl, true)
+    await redis.setexAsync(jwtTokenKey(token), ttl, true)
 
     ctx.status = 200
   })
