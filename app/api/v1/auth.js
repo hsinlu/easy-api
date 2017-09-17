@@ -41,13 +41,11 @@ router
     }
 
     // 更新最后一次登录事件
-    user = await User.findOneAndUpdate({
-      _id: user._id
-    }, {
-        $set: {
-          lastLoginAt: new Date
-        }
-      }, { new: true })
+    user = await User.findByIdAndUpdate(user._id, {
+      $set: {
+        lastLoginAt: new Date
+      }
+    }, { new: true })
 
     ctx.body = {
       _id: user._id,
