@@ -17,10 +17,7 @@ const app = new Koa()
 
 process.env.TZ = 'Asia/Shanghai'
 
-process
-  .on('uncaughtException', (err) => {
-    logger.error('进程未捕获错误: ', err)
-  })
+process.on('uncaughtException', (err) => logger.error('进程未捕获错误: ', err))
 
 !(async function run() {
   try {
@@ -44,8 +41,8 @@ process
     // 跨域处理
     .use(cors({
       // 返回可以跨域访问的url
-      origin: function (ctx) {
-        const origin = this.get('origin')
+      origin: (ctx) => {
+        const origin = ctx.get('origin')
         if (config.cors.allowOrigins.includes(origin)) {
           return origin
         }
