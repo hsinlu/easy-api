@@ -6,7 +6,7 @@ const {
 
 module.exports = async() => {
   const user = {
-    username: 'admin123'
+    username: 'easy-api'
   }
   user.password = await bcrypt.hash('123456', saltRounds)
   await User.create(user)
