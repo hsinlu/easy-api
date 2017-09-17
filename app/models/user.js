@@ -6,6 +6,8 @@ const {
   STATUS_NORMAL,
   STATUS_STOP
 } = require('../common/constants')
+const bcrypt = require('bcrypt')
+const { saltRounds } = require('../config')
 
 const userSchema = new Schema({
   // 账号
@@ -46,7 +48,22 @@ const userSchema = new Schema({
     type: Date
   }
 }, {
-  timestamps: {}
+    timestamps: {}
+  })
+
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password)
+}
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return await next()
+  }
+
+  const hash = await bcrypt.hash(this.password, saltRounds)
+  this.password = hash
+
+  await next()
 })
 
 const User = mongoose.model('User', userSchema)
