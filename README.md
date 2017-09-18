@@ -41,6 +41,7 @@ npm i
       |-- ...
   |-- common                      公共代码
     |-- constants.js              常量定义
+    |-- keys.js                   所有key定义
     |-- ...
   |-- config
     |-- default.js                默认的配置
