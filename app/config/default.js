@@ -51,16 +51,18 @@ module.exports = {
     ]
   },
 
-  // 异常收件人列表，多个收件人使用英文逗号分隔，请修改
-  recipients: 'xxxx@qq.com',
+  smtp: {
+    // 异常收件人列表，多个收件人使用英文逗号分隔，请修改
+    recipients: 'xxx@qq.com,yyy@qq.com',
 
-  // SMTP服务器信息，请修改为您的
-  SMTP: {
-    host: 'smtp.163.com',
-    port: 465,
-    auth: {
-      user: 'user@163.com',
-      pass: 'password'
+    // SMTP服务器信息，请修改为您的
+    SMTP: {
+      host: 'smtp.163.com',
+      port: 465,
+      auth: {
+        user: 'user@163.com',
+        pass: 'password'
+      }
     }
   }
 }

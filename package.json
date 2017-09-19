@@ -45,10 +45,10 @@
     "koa-bodyparser": "^3.0.0",
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
-    "koa-log4": "^2.2.1",
     "koa-router": "^7.2.1",
     "koa-unless": "^1.0.7",
-    "mongoose": "^4.11.10",
+    "log4js": "^2.3.3",
+    "mongoose": "^4.11.11",
     "node-rsa": "^0.4.0",
     "nodemailer": "^4.1.0",
     "only": "0.0.2",
@@ -57,7 +57,7 @@
     "validator": "^5.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.12.1"
   },
   "license": "MIT"
 }

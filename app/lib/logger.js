@@ -1,91 +1,58 @@
-const log4js = require('koa-log4')
+const log4js = require('log4js')
 const config = require('../config')
 
-log4js.configure({
-  appenders: [{
-    type: 'console'
-  }, {
-    type: 'dateFile',
-    absolute: false,
-    filename: config.paths.logs,
-    maxLogSize: 1024 * 1024,
-    pattern: '/yyyyMMddhh_visit.log',
-    // backups: 3,
-    category: 'visit',
-    alwaysIncludePattern: true
-  }, {
-    type: 'dateFile',
-    absolute: false,
-    filename: config.paths.logs,
-    maxLogSize: 1024 * 1024,
-    pattern: '/yyyyMMddhh_info.log',
-    // backups: 3,
-    category: 'info',
-    alwaysIncludePattern: true
-  }, {
-    type: 'dateFile',
-    absolute: false,
-    filename: config.paths.logs,
-    maxLogSize: 1024 * 1024,
-    pattern: '/yyyyMMddhh_error.log',
-    // backups: 3,
-    category: 'error',
-    alwaysIncludePattern: true
-  }, {
-    type: 'dateFile',
-    absolute: false,
-    filename: config.paths.logs,
-    maxLogSize: 1024 * 1024,
-    pattern: '/yyyyMMddhh_fatal.log',
-    // backups: 3,
-    category: 'fatal',
-    alwaysIncludePattern: true
-  }, {
-    type: "logLevelFilter",
-    level: "ERROR",
-    maxLeve: "FATAL",
-    appender: {
-      type: "smtp",
-      recipients: config.recipients,
-      sendInterval: 60,
-      transport: "SMTP",
-      sender: config.SMTP.auth.user,
-      SMTP: {
-        host: config.SMTP.host,
-        secureConnection: true,
-        port: config.SMTP.port,
-        auth: {
-          user: config.SMTP.auth.user,
-          pass: config.SMTP.auth.pass
-        },
-        debug: config.debug
-      },
-      category: "mailer"
+if (config.debug) {
+  log4js.configure({
+    appenders: {
+      stdout: { type: 'stdout' }
+    },
+    categories: {
+      default: { appenders: ['stdout'], level: 'ALL' }
     }
-  }]
-})
+  })
+} else {
+  const categories = ['trace', 'info', 'error', 'fatal']
+  const appenders = {}
+  categories.forEach((category) => appenders[category] = {
+    type: 'dateFile',
+    absolute: false,
+    filename: config.paths.logs,
+    maxLogSize: 1024 * 1024,
+    pattern: `/yyyyMMddhh_${category}.log`,
+    alwaysIncludePattern: true
+  })
+  appenders.smtp = {
+    type: "smtp",
+    recipients: config.smtp.recipients,
+    sendInterval: 60,
+    transport: "SMTP",
+    sender: config.smtp.SMTP.auth.user,
+    SMTP: config.smtp.SMTP
+  }
+  appenders.mail = {
+    type: 'logLevelFilter',
+    appender: 'smtp',
+    level: 'error'
+  }
 
-const visitLogger = log4js.getLogger('visit')
+  log4js.configure({
+    appenders,
+    categories: {
+      default: { appenders: ['trace'], level: 'trace' },
+      info: { appenders: ['info'], level: 'info' },
+      error: { appenders: ['error', 'mail'], level: 'error' },
+      fatal: { appenders: ['fatal', 'mail'], level: 'fatal' }
+    },
+    pm2: true
+  })
+}
+
+const traceLogger = log4js.getLogger()
 const infoLogger = log4js.getLogger('info')
 const errorLogger = log4js.getLogger('error')
 const fatalLogger = log4js.getLogger('fatal')
 
-class Logger {
-  visit() {
-    visitLogger.trace.apply(visitLogger, arguments)
-  }
-
-  info() {
-    infoLogger.info.apply(infoLogger, arguments)
-  }
-
-  error() {
-    errorLogger.error.apply(errorLogger, arguments)
-  }
-
-  fatal() {
-    fatalLogger.fatal.apply(fatalLogger, arguments)
-  }
-}
-
-module.exports = new Logger
+module.exports.trace = traceLogger.trace.bind(traceLogger)
+module.exports.info = infoLogger.info.bind(infoLogger)
+module.exports.error = errorLogger.error.bind(errorLogger)
+module.exports.fatal = fatalLogger.fatal.bind(fatalLogger)
