@@ -18,7 +18,7 @@ const {
  *  hasNext:    是否还有下一页数据
  * }
  */
-Query.prototype.paginate = async(pageIndex = 1, pageSize = 15) => {
+Query.prototype.paginate = async function (pageIndex = 1, pageSize = 15) {
   if (typeof pageIndex === 'string') pageIndex = parseInt(pageIndex)
   if (typeof pageSize === 'string') pageSize = parseInt(pageSize)
 
