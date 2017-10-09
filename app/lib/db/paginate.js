@@ -11,27 +11,21 @@ const {
  *
  * @return {Object}
  * {
- *  list:       数据列表
- *  totalCount: 数据总条数
+ *  objects:    数据列表
+ *  total:      数据总条数
  *  pageIndex:  当前页索引
  *  pageSize:   分页大小
  *  hasNext:    是否还有下一页数据
  * }
  */
 Query.prototype.paginate = async function (pageIndex = 1, pageSize = 15) {
-  if (typeof pageIndex === 'string') pageIndex = parseInt(pageIndex)
-  if (typeof pageSize === 'string') pageSize = parseInt(pageSize)
-
-  let list = await this.skip((pageIndex - 1) * pageSize).limit(pageSize)
-  let totalCount = await this.model.count(this.getQuery())
-
-  let hasNext = totalCount > (pageIndex * pageSize)
-
+  const objects = await this.skip((pageIndex - 1) * pageSize).limit(pageSize)
+  const total = await this.model.count(this.getQuery())
   return {
-    list,
-    totalCount,
+    objects,
+    total,
     pageIndex,
     pageSize,
-    hasNext
+    hasNext: total > (pageIndex * pageSize)
   }
 }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const debug = require('debug')('easy-api:db:traceMQuery')
+const logger = require('../logger')
 const config = require('../../config')
 
 const traceMQuery = (method, info, query) => {
@@ -8,7 +8,7 @@ const traceMQuery = (method, info, query) => {
       console.error('追踪 mongodb 查询错误:', err)
     }
 
-    debug(`${query._collection.collection.name}.${method} ${JSON.stringify(info)}`)
+    logger.trace(`${query._collection.collection.name}.${method} ${JSON.stringify(info)}`)
   }
 }
 
