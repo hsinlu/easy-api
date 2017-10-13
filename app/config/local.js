@@ -1,3 +1,3 @@
-const $default = require('./default')
+const $default = require('./default');
 
-module.exports = Object.assign($default, {})
+module.exports = Object.assign($default, {});

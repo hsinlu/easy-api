@@ -1,8 +1,8 @@
-const router = require('koa-router')()
+const router = require('koa-router')();
 
 router
-  .get('/timestramp', async(ctx) => {
-    ctx.body = new Date().toLocaleString()
-  })
+  .get('/timestramp', async (ctx) => {
+    ctx.body = new Date().toLocaleString();
+  });
 
-module.exports = router
+module.exports = router;

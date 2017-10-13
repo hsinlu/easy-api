@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const {
   Query
-} = mongoose
+} = mongoose;
 
 /**
  * 分页
@@ -19,13 +19,13 @@ const {
  * }
  */
 Query.prototype.paginate = async function (pageIndex = 1, pageSize = 15) {
-  const objects = await this.skip((pageIndex - 1) * pageSize).limit(pageSize)
-  const total = await this.model.count(this.getQuery())
+  const objects = await this.skip((pageIndex - 1) * pageSize).limit(pageSize);
+  const total = await this.model.count(this.getQuery());
   return {
     objects,
     total,
     pageIndex,
     pageSize,
     hasNext: total > (pageIndex * pageSize)
-  }
-}
+  };
+};

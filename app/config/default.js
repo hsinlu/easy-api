@@ -47,7 +47,7 @@ module.exports = {
   cors: {
     // 允许的域名
     allowOrigins: [
-      'http://localhost:3000',
+      'http://localhost:3000'
     ]
   },
 
@@ -65,4 +65,4 @@ module.exports = {
       }
     }
   }
-}
+};

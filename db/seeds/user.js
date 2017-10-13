@@ -1,10 +1,10 @@
-const User = require('../../app/models/user')
+const User = require('../../app/models/user');
 
-module.exports = async() => {
+module.exports = async () => {
   const user = {
     username: 'easy-api',
     password: '123456'
-  }
+  };
 
-  await User.create(user)
-}
+  await User.create(user);
+};
