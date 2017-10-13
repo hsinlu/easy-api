@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 const connect = require('../../app/lib/db/connect');
 
-!(async function seeder () {
+(async () => {
   try {
     // 连接 mongodb
     await connect();

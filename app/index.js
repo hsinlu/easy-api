@@ -18,7 +18,7 @@ process.env.TZ = 'Asia/Shanghai';
 
 process.on('uncaughtException', (err) => logger.error('进程未捕获错误: ', err));
 
-!(async function run () {
+(async () => {
   try {
     // 连接 mongodb
     await require('./lib/db/connect')();
