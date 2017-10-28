@@ -3,7 +3,7 @@
 简单的 api，基于 koa2、mongodb、redis。
 
 ## 环境需求
-1. nodejs >= 8.4.0
+1. nodejs >= 8.8.1
 2. mongodb
 3. redis
 
@@ -52,7 +52,6 @@ npm i
     |-- db
       |-- connect.js                连接mongodb
       |-- paginate.js               扩展分页方法
-      |-- traceMQuery.js            追踪mongodb的查询
     |-- logger.js                 log4日志
     |-- redis.js                  redis
     |-- validator.js              校验相关
