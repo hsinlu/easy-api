@@ -43,7 +43,8 @@ if (config.debug) {
       default: { appenders: ['trace'], level: 'trace' },
       info: { appenders: ['info'], level: 'info' },
       error: { appenders: ['error', 'mail'], level: 'error' },
-      fatal: { appenders: ['fatal', 'mail'], level: 'fatal' }
+      fatal: { appenders: ['fatal', 'mail'], level: 'fatal' },
+      db: { appenders: ['trace'], level: 'trace' }
     },
     pm2: true
   });
@@ -53,8 +54,10 @@ const traceLogger = log4js.getLogger();
 const infoLogger = log4js.getLogger('info');
 const errorLogger = log4js.getLogger('error');
 const fatalLogger = log4js.getLogger('fatal');
+const dbLogger = log4js.getLogger('db');
 
 module.exports.trace = traceLogger.trace.bind(traceLogger);
 module.exports.info = infoLogger.info.bind(infoLogger);
 module.exports.error = errorLogger.error.bind(errorLogger);
 module.exports.fatal = fatalLogger.fatal.bind(fatalLogger);
+module.exports.db = dbLogger.trace.bind(dbLogger);

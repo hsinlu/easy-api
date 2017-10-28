@@ -2,7 +2,7 @@
   "apps": [{
     "name": "easy-api",
     "script": "app",
-    "instances": -1,
+    "instances": 0,
     "exec_mode": "cluster",
     "watch": false,
     "env": {
