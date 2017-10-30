@@ -19,6 +19,9 @@ const {
  * }
  */
 Query.prototype.paginate = async function (pageIndex = 1, pageSize = 15) {
+  pageIndex = parseInt(pageIndex);
+  pageSize = parseInt(pageSize);
+
   const objects = await this.skip((pageIndex - 1) * pageSize).limit(pageSize);
   const total = await this.model.count(this.getQuery());
   return {
